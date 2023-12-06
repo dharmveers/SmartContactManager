@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section style="background:#e2e2e2;height:100%;">
+		<div class="container">
+			<div class="cord-body">
+						
+						<div th:if="${session.message}" class="alert alert-primary" role="alert">
+						<p th:text="${session.message.content}" class="text-center"></p>
+						<th:block th:inline="text" th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+				<div class="container-fluid mt-1">
+				<div class="row">
+					<div class="col-md-7 offset-md-3  bg-light">
+					     <div class="text-center mt-1">
+					    <img style="width:100px;" alt="" th:src="@{/img/img1.png}" src="">
+					    </div>
+						 <h1 class="text-center">Register Here !!</h1>
+						<form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}">
+						
+						<div class="form-group mt-2">
+						  <label for="exampleFormControlInput1" class="form-label">Your Name</label>
+						  <input 
+							  type="text" 
+							  class="form-control" 
+							  th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}" 
+							  name="name" 
+							  placeholder="Enter your name" 
+							  th:value="${user.name}"
+							  required
+						  >
+				          <div class="invalid-feedback" th:each=" e : ${#fields.errors('name')}" th:text="${e}" ></div>
+				        </div>
+				        <div class="form-group mt-2">
+						  <label for="email" class="form-label">Your Email</label>
+						  <input 
+							  type="email" 
+							  class="form-control"
+							  th:classappend="${#fields.hasErrors('email') ? 'is-invalid':''}" 
+							  name="email"  
+							  placeholder="Enter email ID"
+							  th:value="${user.email}" 
+							  required="required"
+						  >
+					      <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
+					    </div> 
+					    <div class="form-group mt-2"> 
+						  <label for="pass" class="form-label">Password</label>
+						  <input 
+							  type="password" 
+							  class="form-control"
+							  th:classappend="${#fields.hasErrors('pass') ? 'is-invalid':''}"  
+							  name="pass" 
+							  placeholder="Enter password"
+							  th:value="${user.pass}"
+							  required="required"
+						  >
+						  <div class="invalid-feedback" th:each="e : ${#fields.errors('pass')}" th:text="${e}"></div>
+                        </div>
+                        <div class="form-group mt-2">
+						  <label for="repass" class="form-label">Retype Password</label>
+						  <input 
+							  type="password" 
+							  class="form-control" 
+							  id="repass" 
+							  name="repass"
+							  placeholder="Enter password" 
+							  required="required"
+						  >
+						</div>
+						<div class="form-group mt-2">
+						  <label for="mob" class="form-label">Mobile Number</label>
+						  <input 
+							  type="text"
+							  class="form-control" 
+							  th:classappend="${#fields.hasErrors('mob') ? 'is-invalid':''}"
+							  id="mob" 
+							  name="mob"
+							  placeholder="Enter mobile Number"  
+							  th:value="${user.mob}"
+							  required="required"
+						  >
+						  <div class="invalid-feedback" th:each="e : ${#fields.errors('mob')}" th:text="${e}"></div>
+						</div>
+						  <div class="form-check form-check-inline">
+						  <input type="radio" id="male" name="gen" value="Male" class="" th:classappend="${#fields.hasErrors('gen') ? 'is-invalid':''}">
+						  <label class="form-check-label" for="inlineRadio"><b>Male</b></label>
+						  </div>
+						  <div class="form-check form-check-inline">
+						  <input type="radio" id="female" name="gen" value="Female" class="" th:classappend="${#fields.hasErrors('gen') ? 'is-invalid':''}">
+						  <label class="form-check-label" for="inlineRadio"><b>Female</b></label>
+						  </div>
+						   <div class="form-group mt-1">
+						  <textarea
+							   rows="5"
+							   class="form-control" 
+							   id="description"
+							   name="description"
+							   placeholder="Enter about yourself"
+							   th:value="${user.description}" 
+						   >
+						   </textarea>
+						 </div>
+						  <div class="form-check mt-3">
+						  <input 
+							  type="checkbox" 
+							  id="agreement" 
+							  name="agreement" 
+							  class="form-check-input" 
+						  >
+						  <label class="form-check-label"><i>Accept terms and conditions</i></label>
+						  </div>
+						  <div class="text-end form-group">
+						  <button class="btn btn-primary" type="submit">Submit</button>
+						  <button class="btn btn-warning" type="reset">Reset</button>
+						  </div>
+						
+						</form>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+		<script>
+			tinymce.init({
+				selector : "#description",
+				height : "270"
+			});
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$(".nav-link").removeClass("active");
+			$("#signup").addClass("active");
+			
+			
+		});
+		</script>
+</section>
+</body>
+</html>

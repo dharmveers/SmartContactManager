@@ -1,0 +1,87 @@
+<!doctype html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(pageId)">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+   
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel=”stylesheet” href=”css/bootstrap.css”>
+    <link rel=”stylesheet” href=”css/bootstrap-responsive.css”>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <title th:text="${title}">base html page</title>
+  </head>
+  <body class="user-dashboard">
+    <!-- dharam start navbar -->
+    <nav class="fixed-top navbar navbar-expand-lg navbar-light" style="background:#009688 !important">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">SmartContactManager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" href="#" th:href="@{/user/index}">Home</a>
+        </li>
+        <li class="nav-item">
+        	<a class="nav-link" href="#" ><span th:text="${user.name}"></span></a>
+        </li>
+        <li class="nav-item">
+        	<a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+    
+    <!-- Dharam ends navbar -->
+    
+    <!-- sidebar starts -->
+
+    <div class="container-flex">
+		    	<div class="mt-3 sidenav" id="sidebar">
+		    		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			        <a id="home-link"  href="#" th:href="@{/user/index}" class="item"><i class="fa-solid fa-house"></i> Home</a>
+			    	<a id="contact-link" href="#" th:href="@{/user/show-Contacts/0}" class="item"><i class="fa-solid fa-id-card"></i> View Contacts</a>
+			    	<a id="addContact-link" href="#" th:href="@{/user/add_contactDetails}" class="item"><i class="fa-solid fa-pen-to-square"></i> Add Contacts</a>
+			    	<a id="profile-link" href="#" th:href="@{/user/profile-page}" class="item"><i class="fa-solid fa-user"></i> Your Profile</a>
+			    	<a id="setting-link" href="#" th:href="@{/user/settings}" class="item"><i class="fa-solid fa-gear"></i> Settings</a>
+			    	<a id="logout-link"  href="#" th:href="@{/logout}" class="item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+			    	<div class="divider"></div>
+				</div>
+			    <!-- content starts -->
+			    <div class="content mt-5" id="content_v">
+			    	<span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
+			        <div th:replace="${pageId}"> </div>
+			    </div>
+		        <!-- content ends -->
+		    
+	</div>
+   
+   <!-- sidebar ends -->
+   
+    
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--  dharam added for sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+   	<script>
+   	function openNav() {
+   	  document.getElementById("sidebar").style.width = "250px";
+   	}
+
+   	function closeNav() {
+   	  document.getElementById("sidebar").style.width = "0";
+   	}
+   	</script>
+  </body>
+</html>

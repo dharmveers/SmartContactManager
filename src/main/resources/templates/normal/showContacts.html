@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Show contact</title>
+</head>
+<body>
+<section>
+<div class="card ms-3 me-3">
+			<div class="text-end form-group me-1 mt-1">
+					<a href="#" th:href="@{/user/index}" style="color:red;text-decoration: none;"><button class="btn-danger">Close</button></a>
+			 </div>
+			<div class="card-body">
+						<div th:if="${session.message}" class="alert " th:classappend="${session.message.type}" role="alert">
+						<p th:text="${session.message.content}" class="text-center"></p>
+						<th:block th:inline="text" th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+			<h1 class="text-center">Your Contacts</h1>
+			<div class="search-container my-4">
+				<i class="fa fa-search"></i>
+				<input id="search-input" type="search" class="form-control form-input" placeholder="Search your contact" onkeyup="searchByKey()">
+				<div class="search-result">
+				
+				</div>
+			</div>
+				<table class="table table-striped">
+					  <thead>
+					    <tr>
+					      <th scope="col">#ID</th>
+					      <th scope="col">Name</th>
+					      <th scope="col">Email</th>
+					      <th scope="col">Contact No</th>
+					      <th scope="col">Action</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="c :${contacts}">
+					      <th scope="row" th:text="${'scmuser'+c.cid}"></th>
+					      <td >
+					      <img 	class="profile-img" alt="no-img" src="" th:src="@{'/img/'+${c.profileImg}}">
+					      <span th:text="${c.fName+' '+c.lastName}"></span>
+					      </td>
+					      <td> <span th:text="${c.emailID}"></span> </td>
+					      
+					      <td th:text="${c.contactNo}"></td>
+					      <td>
+					      <a href="#" th:href="@{'/user/'+${c.cid}+'/contact'}"><i class="fa-sharp fa-solid fa-eye"></i></a>
+					      <a href="#" th:href="@{'/user/delete/'+${c.cid}}" class="ms-3" onclick="deleteData(href)"><i class="fa-solid fa-trash-can"></i></a>
+					      </td>
+					    </tr>
+					    
+					  </tbody>
+			</table>
+			<nav aria-label="Page navigation example">
+			 <ul class="pagination">
+			    <li th:if="${currPage > 0}" class="page-item"><a class="page-link" href="#" th:href="${currPage-1}">Previous</a></li>
+			    
+			    <li th:classappend="${currPage==i-1?'active':''}" th:each="i :${#numbers.sequence(1,totalPages)}" class="page-item"><a class="page-link" href="#" th:href="@{'/user/show-Contacts/'+${i-1}}"><span th:text="${i}"></span></a></li>
+			    
+			    <li th:if="${currPage+1 != totalPages}" class="page-item"><a class="page-link" href="#"  th:href="${currPage+1}">Next</a></li>
+			  </ul>  
+			      
+			</nav>
+			</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".item").removeClass("active");
+	$("#contact-link").addClass("active");
+	
+	
+});
+
+function deleteData(url) {
+    event.preventDefault(); // prevent form submit
+    swal({
+		           title: "Are you sure?",
+		           text: "Once deleted, you will not be able to recover this data file!",
+		           icon: "warning",
+		           buttons: true,
+		           dangerMode: true,
+		           imageUrl: 'thumbs-up.jpg',
+		 cancleButtonClass: "btn-primary",
+         })
+        .then((willDelete) => {
+             if (willDelete) {
+                   swal("Deleted!", "Your data file has been deleted.", "success");
+                   window.location=url;
+             } else {
+            	 swal("Cancelled", "Your data file is safe :)", "error");
+         }
+      });
+}
+
+</script>
+
+</section>
+</body>
+</html>

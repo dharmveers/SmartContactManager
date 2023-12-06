@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="/normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>User Dashboard</title>
+</head>
+<body >
+<section>
+<div class="container-fluid">
+	<div class="card"  style="background-color:#163961;color:white;">
+		
+	    <div class="text-center">
+			<img class="user-dash" style="width:200px; height:200px" alt="" src="" th:src="@{/img/default.jpg}">
+		</div>
+	    <h1 class="text-center"><i>Welcome To the User DashBoard</i></h1>
+		<div class="card-body">
+			<div class="row justify-content-center">
+		       <div class="col-auto">
+				<table class="table table-borderless table-responsive " style="color:white">
+				<tbody>
+					    <tr>
+					      <td align="right"><strong>Current Time</strong></td>
+					      <td ><span th:text="${dat.time}"></span></td>				     
+					    </tr>
+					    <tr>
+					      <td align="right"><strong>Current Date</strong></td>
+					      <td ><span th:text="${dat.date}"></span></td>
+					    </tr>
+					    <tr>
+					      <td align="right"><strong>Country Reg.</strong></td>
+					      <td ><span th:text="${'Indian'}"></span></td>
+					    </tr>
+		    
+			  </tbody>
+			  </table>
+		    </div>
+		  </div>
+		</div>
+		<div class="text-center me-1 mb-2">
+			  <a href="#" th:href="@{/user/add_contactDetails}" style="color:white;text-decoration: none;">
+			  <button class="bg-info btn-lg btn-block">Add Contact</button>
+			  </a>
+        </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".item").removeClass("active");
+	$("#home-link").addClass("active");
+});
+
+</script>
+
+</section>
+</body>
+</html>

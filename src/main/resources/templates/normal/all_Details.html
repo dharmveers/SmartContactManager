@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="/normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Contact Details</title>
+</head>
+<body>
+	<section>
+		<h1 class="text-center">Your Contact Details Here</h1>
+		<div class="card ms-3 me-3" th:if="${contact}">
+			<div class="text-end form-group me-1 mt-1">
+				<a href="#" th:href="@{'/user/show-Contacts/'+${currPage}}"
+					style="text-decoration: none;"><button class="btn-danger">Close</button></a>
+			</div>
+			<div class="card-body">
+				<div class="container text-center">
+					<img style="width: 235px; height: 240px;" class="profile-img"
+						alt="" src="" th:src="@{'/img/'+${contact.profileImg}}">
+					<h2 th:text="${contact.fName+' '+contact.lastName}"></h2>
+				</div>
+				<div class="table-responsive-md">
+					<table class="table table-striped">
+						<tbody>
+							<tr>
+								<th scope="row">#ID</th>
+								<td align="right"><span th:text="${'scmuser'+contact.cid}"></span></td>
+
+							</tr>
+							<tr>
+								<th scope="row">Email ID</th>
+								<td align="right"><span th:text="${contact.emailID}"></span></td>
+
+							</tr>
+							<tr>
+								<th scope="row">Contact NO</th>
+								<td align="right"><span th:text="${contact.contactNo}"></span></td>
+
+							</tr>
+							<tr>
+								<th scope="row">Work Details</th>
+								<td align="right"><span th:text="${contact.workDetails}"></span></td>
+
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="text-center">
+					<p th:utext="${contact.about}"></p>
+				</div>
+				<form action="#"
+					th:action="@{'/user/update-contact/'+${contact.cid}}" class="mt-2"
+					th:object="${contact}" enctype="multipart/form-data" method="POST">
+					<div class="text-end">
+						<button class="btn btn-primary" type="submit">UPDATE</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<h2 class="text-center bg-danger text-white me-3"
+			th:unless="${contact}">You don't have permission to see this
+			details!!</h2>
+	</section>
+
+</body>
+</html>
